@@ -6,7 +6,7 @@ Clang tool for exporting types from c++ source files
 To build this tool you will need to check out the `llvm` repository and checkout the `clang-export-types` repository into it:
 
 ```sh
-git clone //github.com/llvm/llvm-project.git
+git clone https://github.com/llvm/llvm-project.git
 cd llvm-project
 git clone https://github.com/JulianSchmid/clang-export-types.git clang-tools-extra/clang-export-types
 ```

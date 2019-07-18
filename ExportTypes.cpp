@@ -205,11 +205,9 @@ struct TypedumpVisitor : public TypeVisitor<TypedumpVisitor,void> {
 };
 
 //TODO:
-// - type handeling for:
-//   - bitfields
 // - get type name
 
-//Thinking works:
+//WIP How to handle serialization based on the types:
 // - padding issues -> different compilers & targets have different padding behaviours
 //   solutions:
 //     - enforce "non padded" structs & classes
