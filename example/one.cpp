@@ -73,6 +73,20 @@ struct EnumStruct {
     EnumClassWithSize enumClassWithSize;
 };
 
+typedef EnumStruct TypedefedStruct;
+
+struct TypedefUsingStruct {
+    TypedefedStruct a;
+};
+
+#define EXAMPLE_DEFINE unsigned int
+#define EXAMPLE_FUNC(A) unsigned A
+
+struct DefineUsingStruct {
+    EXAMPLE_DEFINE a;
+    EXAMPLE_FUNC(short) b;
+};
+
 int main() {
     {
         A a = {};
@@ -110,5 +124,13 @@ int main() {
     {
         EnumStruct e = {};
         foo<EnumStruct, 18>(e);
+    }
+    {
+        TypedefUsingStruct s = {};
+        foo<TypedefUsingStruct, 19>(s);
+    }
+    {
+        DefineUsingStruct s = {};
+        foo<DefineUsingStruct, 20>(s);
     }
 }

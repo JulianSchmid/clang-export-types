@@ -178,6 +178,10 @@ struct TypedumpVisitor : public TypeVisitor<TypedumpVisitor,void> {
         Visit(e->desugar().getTypePtr());
     }
 
+    void VisitTypedefType(const TypedefType* t) {
+        Visit(t->getDecl()->getUnderlyingType().getTypePtr());
+    }
+
     //not supported elements
     void VisitPointerType(const PointerType* p) {
         Indent();
