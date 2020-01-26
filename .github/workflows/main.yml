@@ -9,24 +9,24 @@ jobs:
 
     steps:
     - name: Checkout llvm
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
       with:
         repository: llvm/llvm-project
         ref: master
         path: llvm
     - name: Checkout clang-export-types
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
       with:
         path: llvm/clang-tools-extra/clang-export-types
     - name: Add clang-export-types to CMake
       run: |
-        cd ${GITHUB_WORKSPACE}/llvm
+        cd ${GITHUB_WORKSPACE}/../..
         pwd
         ls -lah
         echo 'add_subdirectory(clang-export-types)' >> clang-tools-extra/CMakeLists.txt
     - name: Build clang-tools-extra
       run: |
-        cd ${GITHUB_WORKSPACE}/llvm
+        cd ${GITHUB_WORKSPACE}/../..
         pwd
         ls -lah
         mkdir build
