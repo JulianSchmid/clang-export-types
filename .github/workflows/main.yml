@@ -19,6 +19,7 @@ jobs:
         path: clang-tools-extra/clang-export-types
     - name: Add clang-export-types to CMake
       run: |
+        cd ../..
         pwd
         ls -lah
         echo 'add_subdirectory(clang-export-types)' >> clang-tools-extra/CMakeLists.txt
