@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Install ninja
+      run: sudo apt install ninja-build
     - name: Checkout llvm
       uses: actions/checkout@v2
       with:
