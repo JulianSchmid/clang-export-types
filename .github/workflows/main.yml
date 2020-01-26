@@ -1,0 +1,27 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout llvm
+      uses: actions/checkout@v1
+      with:
+        repository: llvm/llvm-project
+        ref: master
+    - name: Checkout clang-export-types
+      uses: actions/checkout@v1
+      with:
+        path: clang-tools-extra/clang-export-types
+    - name: Add clang-export-types to CMake
+      run: echo 'add_subdirectory(clang-export-types)' >> clang-tools-extra/CMakeLists.txt
+    - name: Build clang-tools-extra
+      run: |
+        mkdir build
+        cd build
+        cmake -G Ninja ../llvm -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra"
+        ninja
