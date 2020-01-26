@@ -25,6 +25,7 @@ jobs:
         echo 'add_subdirectory(clang-export-types)' >> clang-tools-extra/CMakeLists.txt
     - name: Build clang-tools-extra
       run: |
+        cd ../..
         mkdir build
         cd build
         cmake -G Ninja ../llvm -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra"
