@@ -14,22 +14,31 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: llvm/llvm-project
-        ref: master
-        path: .
+        ref: llvmorg-9.0.1
+        path: llvm-project
     - name: Checkout clang-export-types
       uses: actions/checkout@v2
       with:
-        path: clang-tools-extra/clang-export-types
+        path: llvm-project/clang-tools-extra/clang-export-types
     - name: Add clang-export-types to CMake
       run: |
         pwd
         ls -lah
-        echo 'add_subdirectory(clang-export-types)' >> clang-tools-extra/CMakeLists.txt
-    - name: Build clang-tools-extra
+        echo 'add_subdirectory(clang-export-types)' >> llvm-project/clang-tools-extra/CMakeLists.txt
+    - name: setup build folder
       run: |
         pwd
         ls -lah
         mkdir build
+    - name: cache build folder
+      id: cache-build
+      uses: actions/cache@v1
+      with:
+        path: build
+    - name: Build clang-tools-extra
+      run: |
+        pwd
+        ls -lah
         cd build
-        cmake -G Ninja ../llvm -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra"
+        cmake -G Ninja ../llvm-project/llvm -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra"
         ninja
