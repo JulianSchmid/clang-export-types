@@ -24,14 +24,14 @@ echo 'add_subdirectory(clang-export-types)' >> clang-tools-extra/CMakeLists.txt
 mkdir build
 cd build
 cmake -G Ninja ../llvm -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra"
-ninja
+ninja clang-export-types
 ```
 
 Alternatively you can also build the tool in release mode:
 
 ```sh
 cmake -G Ninja ../llvm -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=0
-ninja
+ninja clang-export-types
 ```
 
  It is also possible to build with a different build system then ninja (e.g. xcode, visual studio and make). Read the [LLVM Getting Started Guide](https://llvm.org/docs/GettingStarted.html) for more details.
