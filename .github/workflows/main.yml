@@ -25,21 +25,15 @@ jobs:
         pwd
         ls -lah
         echo 'add_subdirectory(clang-export-types)' >> llvm-project/clang-tools-extra/CMakeLists.txt
-    - name: setup build folder
+    - name: Setup build folder
       run: |
         pwd
         ls -lah
         mkdir build
-    - name: cache build folder
-      id: cache-build
-      uses: actions/cache@v1
-      with:
-        path: build
-        key: ${{ runner.os }}
     - name: Build clang-tools-extra
       run: |
         pwd
         ls -lah
         cd build
         cmake -G Ninja ../llvm-project/llvm -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra"
-        ninja
+        ninja clang-export-types
